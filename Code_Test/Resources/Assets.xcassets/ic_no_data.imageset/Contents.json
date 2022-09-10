@@ -1,15 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "pngtree-globalstudentnetworkglobekids-flat-icon--green-and-yello-png-image_1181875.jpeg",
+      "filename" : "no data.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "no data@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
+      "filename" : "no data@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

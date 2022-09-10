@@ -17,7 +17,6 @@ class HomeViewModel : BaseViewModel {
     }
     
     let countryListBehaviorRelay = BehaviorRelay<[CountryResponse]>(value: [])
-    let searchCountryListBehaviorRelay = BehaviorRelay<[CountryResponse]>(value: [])
 }
 
 extension HomeViewModel {

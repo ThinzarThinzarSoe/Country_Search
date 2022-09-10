@@ -10,6 +10,7 @@ import RxSwift
 
 class HomeViewController : BaseViewController {
     
+    @IBOutlet weak var searchView: CardView!
     @IBOutlet weak var lblSearchResult : UILabel!
     @IBOutlet weak var heightConstraintForSearchResultCount : NSLayoutConstraint!
     @IBOutlet weak var tfSearch : UITextField!
@@ -24,12 +25,9 @@ class HomeViewController : BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        countryList.removeAll()
-        searchedCountryList.removeAll()
-        isSearch = false
-        self.viewModel.getCountryList()
+        fetchData()
     }
-
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         isShowNavigationBar(true)
@@ -43,6 +41,8 @@ class HomeViewController : BaseViewController {
         lblSearchResult.textColor = .darkGray
         lblSearchResult.font = UIFont.Roboto.Regular.font(size: 15)
         setupTableView()
+        self.searchView.isHidden = true
+        self.lblSearchResult.isHidden = true
     }
     
     override func viewDidLayoutSubviews(){
@@ -59,8 +59,6 @@ class HomeViewController : BaseViewController {
 
     func setupTableView() {
         tblCountry.registerForCells(cells: [
-            SearchResultItemTableViewCell.self,
-            EmptyTableViewCell.self,
             CountryItemTableViewCell.self])
         tblCountry.separatorStyle = .none
         tblCountry.backgroundColor = .clear
@@ -85,6 +83,8 @@ class HomeViewController : BaseViewController {
                 DispatchQueue.main.async {
                     self?.tblCountry.isHidden = false
                     self?.tblCountry.reloadData()
+                    self?.lblSearchResult.isHidden = false
+                    self?.searchView.isHidden = false
                 }
             }
         }.disposed(by: disposableBag)
@@ -96,7 +96,6 @@ class HomeViewController : BaseViewController {
             .distinctUntilChanged() // If they didn't occur, check if the new value is the same as old.
             .bind(onNext: { (text) in
                 if self.seachKeyWords != text {
-                    self.isSearch = true
                     self.seachKeyWords = text
                     self.searchedCountryList.removeAll()
                     let indexList = self.countryList.binarySearch(key: text )
@@ -108,12 +107,48 @@ class HomeViewController : BaseViewController {
                     self.tblCountry.reloadData()
                 }
         }).disposed(by: disposableBag)
+        
+        viewModel.isNoInternetPublishRelay.bind { isConnect in
+            if isConnect {
+                self.isShowNoDataAndInternet(isShow: true)
+                DispatchQueue.main.async {
+                    self.searchView.isHidden = false
+                    self.tblCountry.isHidden = false
+                    self.lblSearchResult.isHidden = false
+                    self.heightConstraintForSearchResultCount.constant = 0
+                }
+            }
+        }.disposed(by: disposableBag)
+        
+        viewModel.isSeverErrorPublishRelay.bind { isServerError in
+            if isServerError {
+                self.isShowNoDataAndInternet(isShow: true , isServerError: true)
+                DispatchQueue.main.async {
+                    self.searchView.isHidden = false
+                    self.tblCountry.isHidden = false
+                    self.lblSearchResult.isHidden = false
+                    self.heightConstraintForSearchResultCount.constant = 0
+                }
+            }
+        }.disposed(by: disposableBag)
+    }
+    
+    override func reloadScreen() {
+        super.reloadScreen()
+        fetchData()
+    }
+    
+    func fetchData() {
+        seachKeyWords = ""
+        countryList.removeAll()
+        searchedCountryList.removeAll()
+        self.viewModel.getCountryList()
     }
 }
 
 extension HomeViewController : UITableViewDelegate , UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return isSearch ?? true ? searchedCountryList.count :countryList.count
+        return self.seachKeyWords.isEmpty ? countryList.count :searchedCountryList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -122,7 +157,7 @@ extension HomeViewController : UITableViewDelegate , UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if !countryList.isEmpty || searchedCountryList.isEmpty {
-            HomeScreen.HomeVC.navigateToMapViewVC(isSearch ?? true ? searchedCountryList[indexPath.row] : countryList[indexPath.row]).show()
+            HomeScreen.HomeVC.navigateToMapViewVC(self.seachKeyWords.isEmpty ? countryList[indexPath.row] : searchedCountryList[indexPath.row]).show()
         }
     }
 }
@@ -130,7 +165,7 @@ extension HomeViewController : UITableViewDelegate , UITableViewDataSource {
 extension HomeViewController {
     private func getCountryItemTableCell(indexPath: IndexPath) -> UITableViewCell {
         let cell = tblCountry.dequeReuseCell(type: CountryItemTableViewCell.self, indexPath: indexPath)
-        cell.setupCell(data: isSearch ?? true ? searchedCountryList[indexPath.row] : countryList[indexPath.row])
+        cell.setupCell(data: self.seachKeyWords.isEmpty ? countryList[indexPath.row] : searchedCountryList[indexPath.row])
         return cell
     }
 }

@@ -112,28 +112,35 @@ class BaseViewController : UIViewController {
     }
     
     func isShowNoDataAndInternet(isShow : Bool , errorVo : ErrorVO? = nil , isServerError : Bool = false) {
-        errorHandlerView?.removeFromSuperview()
-        errorHandlerView = ErrorHandlerView(frame: view.frame)
-        errorHandlerView?.translatesAutoresizingMaskIntoConstraints = false
-        errorHandlerView?.delegate = self
-        if isShow {
-            errorHandlerView?.setupView(isShow: isShow, errorVo : errorVo , isServerError: isServerError)
-            view.addSubview(errorHandlerView!)
-            errorHandlerView?.snp.makeConstraints({ (errorView) in
-                errorView.left.equalToSuperview()
-                errorView.right.equalToSuperview()
-                errorView.centerY.equalToSuperview()
-            })
-            
-        } else {
-            errorHandlerView?.removeView()
+        DispatchQueue.main.async {
+            self.errorHandlerView?.removeFromSuperview()
+            self.errorHandlerView = ErrorHandlerView(frame: self.view.frame)
+            self.errorHandlerView?.translatesAutoresizingMaskIntoConstraints = false
+            self.errorHandlerView?.delegate = self
+            if isShow {
+                self.errorHandlerView?.setupView(isShow: isShow, errorVo : errorVo , isServerError: isServerError)
+                self.view.addSubview(self.errorHandlerView!)
+                self.errorHandlerView?.snp.makeConstraints({ (errorView) in
+                    errorView.left.equalToSuperview()
+                    errorView.right.equalToSuperview()
+                    errorView.centerY.equalToSuperview()
+                })
+                
+            } else {
+                self.errorHandlerView?.removeView()
+            }
         }
     }
 }
 
 extension BaseViewController : ErrorHandlerDelegate {
     func didTapRetry() {
-        reloadScreen()
-        isShowNoDataAndInternet(isShow: !InternetConnectionManager.shared.isConnectedToNetwork())
+       if InternetConnectionManager.shared.isConnectedToNetwork() {
+            isShowNoDataAndInternet(isShow: false)
+            reloadScreen()
+        } else {
+            showNoInternetConnectionToast()
+            isShowNoDataAndInternet(isShow: true)
+        }
     }
 }

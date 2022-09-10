@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -13,6 +13,7 @@
                 <outlet property="heightConstraintForSearchResultCount" destination="kJt-1X-pYx" id="3Fz-k8-FmZ"/>
                 <outlet property="heightConstraintForSearchView" destination="Bh6-7q-Fri" id="sxa-D7-Ihp"/>
                 <outlet property="lblSearchResult" destination="hg9-nH-x5k" id="PZd-i2-ms3"/>
+                <outlet property="searchView" destination="tcM-GK-Sx7" id="e7N-wU-1mQ"/>
                 <outlet property="tblCountry" destination="f1k-P4-VyX" id="p2L-YA-Wlb"/>
                 <outlet property="tfSearch" destination="K9J-4Q-XSV" id="L2L-yb-AQY"/>
                 <outlet property="view" destination="urh-jg-Xlm" id="ADh-4d-sBi"/>

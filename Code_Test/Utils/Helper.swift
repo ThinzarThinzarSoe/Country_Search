@@ -28,15 +28,14 @@ enum iOSDeviceSizes {
     }
 }
 
-enum DragDirection {
-    case Up
-    case Down
-}
-
 enum ErrorType: Error {
     case NoInterntError
     case NoDataError
     case SeverError
     case KnownError(_ errorMessage: String)
     case UnKnownError
+}
+
+public enum RequestType: String {
+    case GET, POST
 }

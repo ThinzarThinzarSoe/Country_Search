@@ -8,10 +8,6 @@
 import Foundation
 import RxSwift
 
-public enum RequestType: String {
-    case GET, POST
-}
-
 class ApiClient {
     static let shared = ApiClient()
     

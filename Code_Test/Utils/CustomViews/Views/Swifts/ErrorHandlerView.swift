@@ -58,7 +58,7 @@ class ErrorHandlerView: BaseView {
             self.btnRetry.isHidden = false
         }
         if isServerError {
-            error_image = #imageLiteral(resourceName: "ic_no_server")
+            error_image = #imageLiteral(resourceName: "ic_server_error")
             error_title = "Server Error"
             error_desc = ""
             self.btnRetry.isHidden = false

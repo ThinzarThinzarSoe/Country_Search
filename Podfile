@@ -8,9 +8,9 @@ target 'Code_Test' do
   # Pods for Code_Test
 
     pod 'RxSwift'
-    pod 'RxCocoa'
     pod 'SnapKit'
-
+    pod 'RxCocoa'
+    
   target 'Code_TestTests' do
     inherit! :search_paths
     # Pods for testing

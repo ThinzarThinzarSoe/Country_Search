@@ -44,19 +44,11 @@ class BaseViewModel {
         }.disposed(by: disposableBag)
         
         errorPublishRelay.bind { [weak self] (error) in
-            self?.viewController?.showLoading(true)
-            if let error = error as? ErrorType {
-                switch error {
-                case .NoInterntError:
+            self?.viewController?.showLoading(false)
+            if let error = error as? URLError {
+                switch error.code {
+                case .notConnectedToInternet:
                     self?.isNoInternetPublishRelay.accept(true)
-                case .KnownError(let message):
-                    self?.viewController?.showToast(message: message)
-                case .UnKnownError:
-                    if self?.isShowNoDataPageForUnKnownError ?? false {
-                        self?.isSeverErrorPublishRelay.accept(true)
-                    }else {
-                        self?.viewController?.showToast(message: "Something Went Wrong")
-                    }
                 default:
                     self?.isSeverErrorPublishRelay.accept(true)
                 }
