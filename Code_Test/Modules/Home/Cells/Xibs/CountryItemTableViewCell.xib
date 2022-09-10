@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="113" id="hgi-Lo-zXD" customClass="CountryItemTableViewCell" customModule="Code_Test" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="431" height="113"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="hgi-Lo-zXD" id="zEv-a2-CxH">
+                <rect key="frame" x="0.0" y="0.0" width="431" height="113"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MTG-dS-RGj" customClass="CardView" customModule="Code_Test" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="10" width="431" height="103"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="1dJ-At-t7I">
+                                <rect key="frame" x="10" y="10" width="411" height="83"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eFX-2d-2y0">
+                                        <rect key="frame" x="0.0" y="0.0" width="411" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1w4-74-K2y">
+                                        <rect key="frame" x="0.0" y="49" width="411" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="1dJ-At-t7I" secondAttribute="trailing" constant="10" id="gqg-co-WyB"/>
+                            <constraint firstItem="1dJ-At-t7I" firstAttribute="top" secondItem="MTG-dS-RGj" secondAttribute="top" constant="10" id="ogH-sE-HRJ"/>
+                            <constraint firstItem="1dJ-At-t7I" firstAttribute="leading" secondItem="MTG-dS-RGj" secondAttribute="leading" constant="10" id="qLd-nF-bPD"/>
+                            <constraint firstAttribute="bottom" secondItem="1dJ-At-t7I" secondAttribute="bottom" constant="10" id="qxe-rE-VIm"/>
+                            <constraint firstAttribute="height" constant="103" id="wWR-DP-HNf"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="MTG-dS-RGj" firstAttribute="top" secondItem="zEv-a2-CxH" secondAttribute="top" constant="10" id="ERi-eK-ZuG"/>
+                    <constraint firstAttribute="bottom" secondItem="MTG-dS-RGj" secondAttribute="bottom" id="Ezv-ya-rxm"/>
+                    <constraint firstAttribute="trailing" secondItem="MTG-dS-RGj" secondAttribute="trailing" id="JHg-Lw-bBQ"/>
+                    <constraint firstItem="MTG-dS-RGj" firstAttribute="leading" secondItem="zEv-a2-CxH" secondAttribute="leading" id="dau-Ew-pzW"/>
+                </constraints>
+            </tableViewCellContentView>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <connections>
+                <outlet property="heightConstrinat" destination="wWR-DP-HNf" id="n7X-FU-6Y1"/>
+                <outlet property="lblSubTitle" destination="1w4-74-K2y" id="8FW-GB-SZZ"/>
+                <outlet property="lblTitle" destination="eFX-2d-2y0" id="un6-e1-QXW"/>
+            </connections>
+            <point key="canvasLocation" x="141.30434782608697" y="57.924107142857139"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

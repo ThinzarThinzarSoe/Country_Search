@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SplashViewController" customModule="Code_Test" customModuleProvider="target">
+            <connections>
+                <outlet property="view" destination="aJM-vJ-qNd" id="Ue1-w3-81t"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="aJM-vJ-qNd">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_globe" translatesAutoresizingMaskIntoConstraints="NO" id="atE-Mr-m9s">
+                    <rect key="frame" x="117.5" y="358.5" width="179" height="179"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="atE-Mr-m9s" secondAttribute="height" multiplier="1:1" id="nCo-KZ-00i"/>
+                    </constraints>
+                </imageView>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="5Gc-j6-CeB"/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="atE-Mr-m9s" firstAttribute="height" secondItem="aJM-vJ-qNd" secondAttribute="height" multiplier="0.2" id="BOo-Di-sdE"/>
+                <constraint firstItem="atE-Mr-m9s" firstAttribute="centerY" secondItem="aJM-vJ-qNd" secondAttribute="centerY" id="crj-Pa-lNV"/>
+                <constraint firstItem="atE-Mr-m9s" firstAttribute="centerX" secondItem="aJM-vJ-qNd" secondAttribute="centerX" id="lqB-Ye-opD"/>
+            </constraints>
+            <point key="canvasLocation" x="108" y="137"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="ic_globe" width="50" height="50"/>
+    </resources>
+</document>

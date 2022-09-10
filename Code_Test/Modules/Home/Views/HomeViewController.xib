@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HomeViewController" customModule="Code_Test" customModuleProvider="target">
+            <connections>
+                <outlet property="heightConstraintForSearchResultCount" destination="kJt-1X-pYx" id="3Fz-k8-FmZ"/>
+                <outlet property="heightConstraintForSearchView" destination="Bh6-7q-Fri" id="sxa-D7-Ihp"/>
+                <outlet property="lblSearchResult" destination="hg9-nH-x5k" id="PZd-i2-ms3"/>
+                <outlet property="tblCountry" destination="f1k-P4-VyX" id="p2L-YA-Wlb"/>
+                <outlet property="tfSearch" destination="K9J-4Q-XSV" id="L2L-yb-AQY"/>
+                <outlet property="view" destination="urh-jg-Xlm" id="ADh-4d-sBi"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="urh-jg-Xlm">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tcM-GK-Sx7" customClass="CardView" customModule="Code_Test" customModuleProvider="target">
+                    <rect key="frame" x="16" y="54" width="382" height="70"/>
+                    <subviews>
+                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Search Country" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="K9J-4Q-XSV">
+                            <rect key="frame" x="10" y="26" width="362" height="18.5"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </textField>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="K9J-4Q-XSV" firstAttribute="centerY" secondItem="tcM-GK-Sx7" secondAttribute="centerY" id="AV1-O0-WXN"/>
+                        <constraint firstItem="K9J-4Q-XSV" firstAttribute="leading" secondItem="tcM-GK-Sx7" secondAttribute="leading" constant="10" id="AmU-Wj-XIJ"/>
+                        <constraint firstAttribute="height" constant="70" id="Bh6-7q-Fri"/>
+                        <constraint firstAttribute="trailing" secondItem="K9J-4Q-XSV" secondAttribute="trailing" constant="10" id="Kdj-9X-yNB"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                            <real key="value" value="10"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hg9-nH-x5k">
+                    <rect key="frame" x="16" y="124" width="382" height="50"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="kJt-1X-pYx"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="f1k-P4-VyX">
+                    <rect key="frame" x="16" y="174" width="382" height="688"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                </tableView>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="TFJ-yu-qoD"/>
+            <color key="backgroundColor" red="0.96862745098039216" green="0.97647058823529409" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="hg9-nH-x5k" firstAttribute="top" secondItem="tcM-GK-Sx7" secondAttribute="bottom" id="59C-ZQ-5Tv"/>
+                <constraint firstItem="TFJ-yu-qoD" firstAttribute="trailing" secondItem="f1k-P4-VyX" secondAttribute="trailing" constant="16" id="DUT-XN-RNA"/>
+                <constraint firstItem="TFJ-yu-qoD" firstAttribute="trailing" secondItem="hg9-nH-x5k" secondAttribute="trailing" constant="16" id="JPj-Gg-QIQ"/>
+                <constraint firstItem="f1k-P4-VyX" firstAttribute="top" secondItem="hg9-nH-x5k" secondAttribute="bottom" id="Mjt-HT-yfm"/>
+                <constraint firstItem="tcM-GK-Sx7" firstAttribute="top" secondItem="TFJ-yu-qoD" secondAttribute="top" constant="10" id="Ua9-ng-A1E"/>
+                <constraint firstItem="hg9-nH-x5k" firstAttribute="leading" secondItem="TFJ-yu-qoD" secondAttribute="leading" constant="16" id="inm-xx-GcB"/>
+                <constraint firstItem="tcM-GK-Sx7" firstAttribute="leading" secondItem="TFJ-yu-qoD" secondAttribute="leading" constant="16" id="jsW-fs-KrG"/>
+                <constraint firstItem="TFJ-yu-qoD" firstAttribute="trailing" secondItem="tcM-GK-Sx7" secondAttribute="trailing" constant="16" id="kbb-bC-Our"/>
+                <constraint firstItem="f1k-P4-VyX" firstAttribute="leading" secondItem="TFJ-yu-qoD" secondAttribute="leading" constant="16" id="rc4-RN-hAP"/>
+                <constraint firstItem="TFJ-yu-qoD" firstAttribute="bottom" secondItem="f1k-P4-VyX" secondAttribute="bottom" id="vEB-Xr-nfT"/>
+            </constraints>
+            <point key="canvasLocation" x="88.405797101449281" y="143.97321428571428"/>
+        </view>
+    </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

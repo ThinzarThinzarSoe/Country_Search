@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_7" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MapViewController" customModule="Code_Test" customModuleProvider="target">
+            <connections>
+                <outlet property="mapView" destination="xsC-kH-Jeh" id="yPh-f7-iKg"/>
+                <outlet property="view" destination="9HI-kv-XUx" id="qIw-bd-jCs"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="9HI-kv-XUx">
+            <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xsC-kH-Jeh" customClass="MKMapView">
+                    <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </view>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="ROQ-3L-xab"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="xsC-kH-Jeh" firstAttribute="leading" secondItem="9HI-kv-XUx" secondAttribute="leading" id="Po2-og-Xvj"/>
+                <constraint firstAttribute="bottom" secondItem="xsC-kH-Jeh" secondAttribute="bottom" id="RvM-zR-FS1"/>
+                <constraint firstItem="xsC-kH-Jeh" firstAttribute="top" secondItem="9HI-kv-XUx" secondAttribute="top" id="dlu-54-sSn"/>
+                <constraint firstItem="xsC-kH-Jeh" firstAttribute="trailing" secondItem="9HI-kv-XUx" secondAttribute="trailing" id="iGe-Vb-tnB"/>
+            </constraints>
+            <point key="canvasLocation" x="169.56521739130437" y="145.98214285714286"/>
+        </view>
+    </objects>
+</document>
