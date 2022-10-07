@@ -18,10 +18,11 @@ class HomeViewController : BaseViewController {
     @IBOutlet weak var heightConstraintForSearchView : NSLayoutConstraint!
     
     var viewModel : HomeViewModel = HomeViewModel()
-    var countryList : [CountryResponse] = []
-    var searchedCountryList : [CountryResponse] = []
-    var isSearch : Bool?
+    var countryList : [CountryVO] = []
+    var searchedCountryList : [CountryVO] = []
+    var isSearch : Bool = false
     var seachKeyWords : String = ""
+    var trie = CityTrie()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -79,37 +80,53 @@ class HomeViewController : BaseViewController {
         super.bindData()
         viewModel.countryListBehaviorRelay.bind { [weak self] dataList in
             if !dataList.isEmpty {
-                self?.countryList = dataList.sorted { $0.name ?? "" < $1.name ?? ""}
-                DispatchQueue.main.async {
-                    self?.tblCountry.isHidden = false
-                    self?.tblCountry.reloadData()
-                    self?.lblSearchResult.isHidden = false
-                    self?.searchView.isHidden = false
-                }
+                self?.countryList = dataList
+                self?.countryList.forEach({ city in
+                    self?.trie.add(city)
+                })
+            }
+            DispatchQueue.main.async {
+                self?.tblCountry.isHidden = dataList.isEmpty
+                self?.tblCountry.reloadData()
+                self?.lblSearchResult.isHidden = dataList.isEmpty
+                self?.searchView.isHidden = dataList.isEmpty
             }
         }.disposed(by: disposableBag)
         
-        tfSearch
-            .rx.text // Observable property thanks to RxCocoa
-            .orEmpty.skip(1)  // Make it non-optional
-            .debounce(.seconds(3), scheduler: MainScheduler.instance) // Wait 0.5 for changes.
+        tfSearch?.rx.text.bind { [weak self] text in
+            if let text = text, !text.isEmpty {
+                self?.viewModel.keywordDataBehaviorRelay.accept(text)
+            } else {
+                self?.isSearch = false
+                self?.seachKeyWords = text ?? ""
+                self?.tblCountry.reloadData()
+                self?.isShowNoDataAndInternet(isShow: false)
+                self?.heightConstraintForSearchResultCount.constant = 0
+                self?.lblSearchResult.isHidden = true
+            }
+        }.disposed(by: disposableBag)
+        
+        viewModel.keywordDataBehaviorRelay // Observable property thanks to RxCocoa
             .distinctUntilChanged() // If they didn't occur, check if the new value is the same as old.
             .bind(onNext: { (text) in
                 if self.seachKeyWords != text {
+                    self.isSearch = true
                     self.seachKeyWords = text
                     self.searchedCountryList.removeAll()
-                    let indexList = self.countryList.binarySearch(key: text )
-                    indexList?.forEach({ index in
-                        self.searchedCountryList.append(self.countryList[index])
-                    })
+                    self.searchedCountryList = self.trie.findCitiesWithPrefix(prefix: self.seachKeyWords).sorted { $0.name ?? "" < $1.name ?? ""}
                     self.lblSearchResult.text = "Search Result (\(self.searchedCountryList.count))"
                     self.heightConstraintForSearchResultCount.constant = UIScreen.main.bounds.height * 0.08
-                    self.tblCountry.reloadData()
+                    self.lblSearchResult.isHidden = self.searchedCountryList.isEmpty
+                    if self.searchedCountryList.isEmpty {
+                        self.isShowNoDataAndInternet(isShow: true)
+                    }
                 }
+                self.tblCountry.reloadData()
         }).disposed(by: disposableBag)
         
-        viewModel.isNoInternetPublishRelay.bind { isConnect in
-            if isConnect {
+        viewModel.isNoDataPublishRealy.bind {
+            self.tblCountry.isHidden = $0
+            if $0 {
                 self.isShowNoDataAndInternet(isShow: true)
                 DispatchQueue.main.async {
                     self.searchView.isHidden = false
@@ -120,9 +137,23 @@ class HomeViewController : BaseViewController {
             }
         }.disposed(by: disposableBag)
         
-        viewModel.isSeverErrorPublishRelay.bind { isServerError in
-            if isServerError {
-                self.isShowNoDataAndInternet(isShow: true , isServerError: true)
+        viewModel.isSeverErrorPublishRelay.bind {
+            self.tblCountry.isHidden = $0
+            if $0 {
+                self.isShowNoDataAndInternet(isShow: $0 , isServerError: $0)
+                DispatchQueue.main.async {
+                    self.searchView.isHidden = false
+                    self.tblCountry.isHidden = false
+                    self.lblSearchResult.isHidden = false
+                    self.heightConstraintForSearchResultCount.constant = 0
+                }
+            }
+        }.disposed(by: disposableBag)
+        
+        viewModel.isNoInternetPublishRelay.bind {
+            self.tblCountry.isHidden = $0
+            if $0 {
+                self.isShowNoDataAndInternet(isShow: $0)
                 DispatchQueue.main.async {
                     self.searchView.isHidden = false
                     self.tblCountry.isHidden = false
@@ -148,7 +179,7 @@ class HomeViewController : BaseViewController {
 
 extension HomeViewController : UITableViewDelegate , UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.seachKeyWords.isEmpty ? countryList.count :searchedCountryList.count
+        return isSearch ? searchedCountryList.count :countryList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -157,7 +188,7 @@ extension HomeViewController : UITableViewDelegate , UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if !countryList.isEmpty || searchedCountryList.isEmpty {
-            HomeScreen.HomeVC.navigateToMapViewVC(self.seachKeyWords.isEmpty ? countryList[indexPath.row] : searchedCountryList[indexPath.row]).show()
+            HomeScreen.HomeVC.navigateToMapViewVC(isSearch ? searchedCountryList[indexPath.row] : countryList[indexPath.row]).show()
         }
     }
 }
@@ -165,7 +196,7 @@ extension HomeViewController : UITableViewDelegate , UITableViewDataSource {
 extension HomeViewController {
     private func getCountryItemTableCell(indexPath: IndexPath) -> UITableViewCell {
         let cell = tblCountry.dequeReuseCell(type: CountryItemTableViewCell.self, indexPath: indexPath)
-        cell.setupCell(data: self.seachKeyWords.isEmpty ? countryList[indexPath.row] : searchedCountryList[indexPath.row])
+        cell.setupCell(data: isSearch ? searchedCountryList[indexPath.row] : countryList[indexPath.row])
         return cell
     }
 }

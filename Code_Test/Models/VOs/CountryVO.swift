@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct CountryResponse : Codable {
+struct CountryVO : Codable {
     var country : String?
     var name : String?
     var _id : Int?

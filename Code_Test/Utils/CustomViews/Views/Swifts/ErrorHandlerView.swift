@@ -34,39 +34,36 @@ class ErrorHandlerView: BaseView {
         btnRetry.setTitle("Try Again", for: .normal)
     }
     
-    func setupView(isShow : Bool , errorVo : ErrorVO? , isServerError : Bool = false) {
+    func setupView(isShow : Bool , title : String , description : String , image : UIImage, isServerError : Bool = false) {
         widthConstraintForTryAgain.constant = "Try Again".size(withAttributes: [.font: UIFont.Roboto.Bold.font(size: 16)]).width + 20
         var error_image : UIImage?
         var error_title : String?
         var error_desc : String?
-        if InternetConnectionManager.shared.isConnectedToNetwork() {
-            if let error = errorVo {
-                error_image = UIImage(named: error.image ?? "")
-                error_title = error.title
-                error_desc = error.description
-                self.btnRetry.isHidden = true
+        if !InternetConnectionManager.shared.isConnectedToNetwork() {
+            error_image = UIImage(named: "ic_no_internet")
+            error_title = ""
+            error_desc = "No Internet"
+            self.btnRetry.isHidden = false
+            self.btnRetry.isUserInteractionEnabled = true
+        } else {
+            if isServerError {
+                error_image = UIImage(named: "ic_no_server")
+                error_title = "Server Error"
+                error_desc = ""
+                self.btnRetry.isHidden = false
+                self.btnRetry.isUserInteractionEnabled = true
             } else {
-                error_image = #imageLiteral(resourceName: "ic_no_data")
-                error_title = "No Record Found"
+                
+                error_image = UIImage(named: "ic_no_data")
+                error_title = "No Result Found"
                 error_desc = ""
                 self.btnRetry.isHidden = true
+                self.btnRetry.isUserInteractionEnabled = false
             }
-        } else {
-            error_image = #imageLiteral(resourceName: "ic_no_internet")
-            error_title = ""
-            error_desc = "Could not connect to server . Please check network connection"
-            self.btnRetry.isHidden = false
-        }
-        if isServerError {
-            error_image = #imageLiteral(resourceName: "ic_server_error")
-            error_title = "Server Error"
-            error_desc = ""
-            self.btnRetry.isHidden = false
         }
         imgError.image = error_image
         lblErrorTitle.text = error_title
         lblErrorDesc.text = error_desc
-        btnRetry.isUserInteractionEnabled = true
     }
 
     func removeView() {

@@ -13,7 +13,7 @@ class MapViewController : BaseViewController {
 
     @IBOutlet weak var mapView: MKMapView!
 
-    var countryData : CountryResponse?
+    var countryData : CountryVO?
     var annotation: MKPointAnnotation?
     
     override func viewDidLoad() {
@@ -22,14 +22,8 @@ class MapViewController : BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        setupNavigationTitle(title: "Location")
         mapView.isHidden = true
         setupData()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        mapView.isHidden = true
     }
     
     func setupData() {
@@ -55,25 +49,25 @@ class MapViewController : BaseViewController {
     }
     
     func setupMapView() {
-        guard let countryData = countryData else {
-            return
+        if let city = countryData {
+            self.title = city.name
+            self.addPin(title: city.name ?? "" , coord: city.coord ?? CoordinateVO(lon: 0.0, lat: 0.0))
+            self.focusMapView(coord: city.coord ?? CoordinateVO(lon: 0.0, lat: 0.0))
         }
-
-        let cityCoordinate = CLLocationCoordinate2D(latitude: countryData.coord?.lat ?? 0,
-                                                    longitude: countryData.coord?.lon ?? 0)
-        mapView.setCenter(cityCoordinate, animated: true)
-
-        annotation = MKPointAnnotation()
-        annotation?.title = countryData.name
-        annotation?.coordinate = cityCoordinate
     }
-}
+    
+    private func addPin(title: String, coord: CoordinateVO) {
+        let annotation = MKPointAnnotation()
+        let centerCoordinate = CLLocationCoordinate2D(latitude: coord.lat ?? 0.0, longitude: coord.lon ?? 0.0)
+        annotation.coordinate = centerCoordinate
+        annotation.title = title
+        mapView.addAnnotation(annotation)
+    }
 
-extension MapViewController: MKMapViewDelegate {
-    func mapViewDidFinishRenderingMap(_ mapView: MKMapView, fullyRendered: Bool) {
-        if let annotation = annotation {
-            mapView.addAnnotation(annotation)
-            mapView.selectAnnotation(annotation, animated: true)
-        }
+    private func focusMapView(coord: CoordinateVO) {
+        let mapCenter = CLLocationCoordinate2DMake(coord.lat ?? 0.0, coord.lon ?? 0.0)
+        let span = MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)
+        let region = MKCoordinateRegion(center: mapCenter, span: span)
+        mapView.region = region
     }
 }

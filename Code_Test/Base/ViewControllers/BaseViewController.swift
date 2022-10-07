@@ -111,24 +111,22 @@ class BaseViewController : UIViewController {
         setNavigationColor()
     }
     
-    func isShowNoDataAndInternet(isShow : Bool , errorVo : ErrorVO? = nil , isServerError : Bool = false) {
-        DispatchQueue.main.async {
-            self.errorHandlerView?.removeFromSuperview()
-            self.errorHandlerView = ErrorHandlerView(frame: self.view.frame)
-            self.errorHandlerView?.translatesAutoresizingMaskIntoConstraints = false
-            self.errorHandlerView?.delegate = self
-            if isShow {
-                self.errorHandlerView?.setupView(isShow: isShow, errorVo : errorVo , isServerError: isServerError)
-                self.view.addSubview(self.errorHandlerView!)
-                self.errorHandlerView?.snp.makeConstraints({ (errorView) in
-                    errorView.left.equalToSuperview()
-                    errorView.right.equalToSuperview()
-                    errorView.centerY.equalToSuperview()
-                })
-                
-            } else {
-                self.errorHandlerView?.removeView()
-            }
+    func isShowNoDataAndInternet(isShow : Bool , isServerError : Bool = false, errorImage: UIImage? = nil, errorTitle: String? = nil, errorDesc: String? = nil) {
+        errorHandlerView?.removeFromSuperview()
+        errorHandlerView = ErrorHandlerView(frame: view.frame)
+        errorHandlerView?.translatesAutoresizingMaskIntoConstraints = false
+        errorHandlerView?.delegate = self
+        if isShow {
+            errorHandlerView?.setupView(isShow: isShow, title: errorTitle ?? "", description: errorDesc ?? "", image: errorImage ?? UIImage(), isServerError: isServerError)
+            view.addSubview(errorHandlerView!)
+            errorHandlerView?.snp.makeConstraints({ (errorView) in
+                errorView.left.equalToSuperview()
+                errorView.right.equalToSuperview()
+                errorView.centerY.equalToSuperview()
+            })
+            
+        } else {
+            errorHandlerView?.removeView()
         }
     }
 }

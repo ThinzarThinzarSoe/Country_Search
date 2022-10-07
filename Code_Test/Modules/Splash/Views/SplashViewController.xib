@@ -17,24 +17,20 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_globe" translatesAutoresizingMaskIntoConstraints="NO" id="atE-Mr-m9s">
-                    <rect key="frame" x="117.5" y="358.5" width="179" height="179"/>
-                    <constraints>
-                        <constraint firstAttribute="width" secondItem="atE-Mr-m9s" secondAttribute="height" multiplier="1:1" id="nCo-KZ-00i"/>
-                    </constraints>
-                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading......" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WGo-Vz-gZp">
+                    <rect key="frame" x="155" y="435.5" width="104.5" height="25.5"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <viewLayoutGuide key="safeArea" id="5Gc-j6-CeB"/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstItem="atE-Mr-m9s" firstAttribute="height" secondItem="aJM-vJ-qNd" secondAttribute="height" multiplier="0.2" id="BOo-Di-sdE"/>
-                <constraint firstItem="atE-Mr-m9s" firstAttribute="centerY" secondItem="aJM-vJ-qNd" secondAttribute="centerY" id="crj-Pa-lNV"/>
-                <constraint firstItem="atE-Mr-m9s" firstAttribute="centerX" secondItem="aJM-vJ-qNd" secondAttribute="centerX" id="lqB-Ye-opD"/>
+                <constraint firstItem="WGo-Vz-gZp" firstAttribute="centerY" secondItem="aJM-vJ-qNd" secondAttribute="centerY" id="ZmF-PQ-QZM"/>
+                <constraint firstItem="WGo-Vz-gZp" firstAttribute="centerX" secondItem="aJM-vJ-qNd" secondAttribute="centerX" id="rPD-Rw-nHz"/>
             </constraints>
             <point key="canvasLocation" x="108" y="137"/>
         </view>
     </objects>
-    <resources>
-        <image name="ic_globe" width="50" height="50"/>
-    </resources>
 </document>

@@ -9,7 +9,7 @@ import Foundation
 import RxSwift
 
 protocol HomeModelProtocol {
-    func getCountryList() -> Observable<[CountryResponse]?>
+    func getCountryList() -> Observable<[CountryVO]?>
 }
 
 class HomeModel : HomeModelProtocol {
@@ -19,11 +19,11 @@ class HomeModel : HomeModelProtocol {
 }
 
 extension HomeModel {
-    func getCountryList() -> Observable<[CountryResponse]?>{
+    func getCountryList() -> Observable<[CountryVO]?>{
         let url = ApiConfig.CountryList.getCountryList.getURLString()
-        return ApiClient.shared.request(url: url).flatMap { responseData -> Observable<[CountryResponse]?> in
+        return ApiClient.shared.request(url: url).flatMap { responseData -> Observable<[CountryVO]?> in
             if let data = responseData as? Data {
-                if let response = data.decode(modelType: [CountryResponse].self) {
+                if let response = data.decode(modelType: [CountryVO].self) {
                     return Observable.just(response)
                 }
             }

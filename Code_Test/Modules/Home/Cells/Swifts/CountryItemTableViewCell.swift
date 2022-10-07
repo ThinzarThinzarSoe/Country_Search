@@ -34,7 +34,7 @@ class CountryItemTableViewCell : BaseTableViewCell {
         heightForCountryView()
     }
     
-    func setupCell(data : CountryResponse) {
+    func setupCell(data : CountryVO) {
         lblTitle.text = "\(data.name ?? "-"), \(data.country ?? "-")"
         lblSubTitle.text = "lat \(data.coord?.lat ?? 0.0) , long  \(data.coord?.lon ?? 0.0)"
     }
