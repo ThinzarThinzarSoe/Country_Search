@@ -10,7 +10,7 @@ import Foundation
 class HomeScreen {
     
     enum HomeVC {
-        case navigateToMapViewVC(_ countryData : CountryVO)
+        case navigateToMapViewVC(_ countryData : CityVO)
         
         func show() {
             switch self {

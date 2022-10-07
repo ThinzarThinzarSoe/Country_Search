@@ -18,8 +18,8 @@ class HomeViewController : BaseViewController {
     @IBOutlet weak var heightConstraintForSearchView : NSLayoutConstraint!
     
     var viewModel : HomeViewModel = HomeViewModel()
-    var countryList : [CountryVO] = []
-    var searchedCountryList : [CountryVO] = []
+    var countryList : [CityVO] = []
+    var searchedCountryList : [CityVO] = []
     var isSearch : Bool = false
     var seachKeyWords : String = ""
     var trie = CityTrie()

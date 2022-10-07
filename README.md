@@ -29,6 +29,13 @@ We have a list of cities containing around 200k entries in JSON format. Each ent
 - pod install to install related libraries
 - open Code_test.xcworkspace and run the project
 
+## Screenshots
+
+<div>
+    <img src="/Screenshot/Img-CountryList.png" width="200px" height="400px"  ></img>
+    <img src="/Screenshot/Img-MapView.png" width="200px" height="400px"  ></img>
+</div>
+
 ## Technologies
 
 Country Search iOS use the following architecture and technologies

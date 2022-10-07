@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		6C7BBA5C37F9E62B1A2438D9 /* Pods_Code_Test.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EDC5469138E4C98D0842887 /* Pods_Code_Test.framework */; };
-		9E20C9FB28C9F39E003D9C0E /* CountryVO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E20C9FA28C9F39E003D9C0E /* CountryVO.swift */; };
+		9E20C9FB28C9F39E003D9C0E /* CityVO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E20C9FA28C9F39E003D9C0E /* CityVO.swift */; };
 		9E20C9FD28C9F3D9003D9C0E /* CoordinateVO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E20C9FC28C9F3D9003D9C0E /* CoordinateVO.swift */; };
 		9E311C8328EFBD5A0041E690 /* TrieNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E311C8228EFBD5A0041E690 /* TrieNode.swift */; };
 		9E311C8528EFBD730041E690 /* CityTrie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E311C8428EFBD730041E690 /* CityTrie.swift */; };
@@ -98,7 +98,7 @@
 		31E856D8CFAB886D32412800 /* Pods-Code_Test.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Code_Test.debug.xcconfig"; path = "Target Support Files/Pods-Code_Test/Pods-Code_Test.debug.xcconfig"; sourceTree = "<group>"; };
 		49A97AB180EB8E94FB84CB80 /* Pods-Code_TestTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Code_TestTests.debug.xcconfig"; path = "Target Support Files/Pods-Code_TestTests/Pods-Code_TestTests.debug.xcconfig"; sourceTree = "<group>"; };
 		7EDC5469138E4C98D0842887 /* Pods_Code_Test.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Code_Test.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		9E20C9FA28C9F39E003D9C0E /* CountryVO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryVO.swift; sourceTree = "<group>"; };
+		9E20C9FA28C9F39E003D9C0E /* CityVO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityVO.swift; sourceTree = "<group>"; };
 		9E20C9FC28C9F3D9003D9C0E /* CoordinateVO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinateVO.swift; sourceTree = "<group>"; };
 		9E311C8228EFBD5A0041E690 /* TrieNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrieNode.swift; sourceTree = "<group>"; };
 		9E311C8428EFBD730041E690 /* CityTrie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityTrie.swift; sourceTree = "<group>"; };
@@ -487,7 +487,7 @@
 		9EEFB11228C6016F004A8F6C /* VOs */ = {
 			isa = PBXGroup;
 			children = (
-				9E20C9FA28C9F39E003D9C0E /* CountryVO.swift */,
+				9E20C9FA28C9F39E003D9C0E /* CityVO.swift */,
 				9E20C9FC28C9F3D9003D9C0E /* CoordinateVO.swift */,
 			);
 			path = VOs;
@@ -858,7 +858,7 @@
 				9E8AD20D28CB9B8600408DAD /* String + Extension.swift in Sources */,
 				9E9EF55628CA399D00D6B884 /* SceneDelegate.swift in Sources */,
 				9EEFB05B28C5F7AB004A8F6C /* AppDelegate.swift in Sources */,
-				9E20C9FB28C9F39E003D9C0E /* CountryVO.swift in Sources */,
+				9E20C9FB28C9F39E003D9C0E /* CityVO.swift in Sources */,
 				9EEFB0B728C5F8A5004A8F6C /* UIPaddedLabel.swift in Sources */,
 				9E9EF55828CA3B0B00D6B884 /* HomeViewModel.swift in Sources */,
 				9EEFB0BB28C5F8A5004A8F6C /* DictionaryEncoder.swift in Sources */,

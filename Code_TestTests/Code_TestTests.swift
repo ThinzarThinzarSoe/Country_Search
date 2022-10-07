@@ -11,7 +11,7 @@ import RxSwift
 @testable import Code_Test
 
 class Code_TestTests: XCTestCase {
-    var countryList : [CountryVO] = []
+    var countryList : [CityVO] = []
     var trie = CityTrie()
     
     override func setUp() {
@@ -27,7 +27,7 @@ class Code_TestTests: XCTestCase {
         if let path = Bundle.main.path(forResource: "cities-Test", ofType: "json") {
             do {
                 let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
-                countryList = data.decode(modelType: [CountryVO].self) ?? []
+                countryList = data.decode(modelType: [CityVO].self) ?? []
                 countryList.forEach({ city in
                     self.trie.add(city)
                 })
@@ -39,11 +39,11 @@ class Code_TestTests: XCTestCase {
     
     func testSearchFunctionForPass() {
         let searchedCountryList = self.trie.findCitiesWithPrefix(prefix: "A").sorted{ $0.name ?? ""  < $1.name ?? ""}
-        let expectedArray : [CountryVO] = [
-                            CountryVO(country: "US", name: "Alabama", _id: 4829764 , coord: CoordinateVO(lon: -86.750259, lat:32.750408 )),
-                            CountryVO(country: "US", name: "Albuquerque", _id: 5454711 , coord: CoordinateVO(lon:-106.651138 , lat:35.084492 )),
-                            CountryVO(country: "US", name: "Anaheim", _id: 5323810 , coord: CoordinateVO(lon: -117.914497, lat: 33.835289)),
-                            CountryVO(country: "HN", name: "Arizona", _id:3615069 , coord: CoordinateVO(lon: -87.316673, lat: 15.63333))
+        let expectedArray : [CityVO] = [
+                            CityVO(country: "US", name: "Alabama", _id: 4829764 , coord: CoordinateVO(lon: -86.750259, lat:32.750408 )),
+                            CityVO(country: "US", name: "Albuquerque", _id: 5454711 , coord: CoordinateVO(lon:-106.651138 , lat:35.084492 )),
+                            CityVO(country: "US", name: "Anaheim", _id: 5323810 , coord: CoordinateVO(lon: -117.914497, lat: 33.835289)),
+                            CityVO(country: "HN", name: "Arizona", _id:3615069 , coord: CoordinateVO(lon: -87.316673, lat: 15.63333))
                             ]
         print(searchedCountryList)
         XCTAssertEqual(expectedArray[0]._id, searchedCountryList[0]._id)

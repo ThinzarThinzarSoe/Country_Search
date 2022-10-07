@@ -9,7 +9,7 @@ class AppScreens {
 }
 
 extension AppScreens {
-    func navigateToMapViewVC(_ countryData : CountryVO) {
+    func navigateToMapViewVC(_ countryData : CityVO) {
         let vc = MapViewController.init()
         vc.countryData = countryData
         currentVC?.navigationController?.pushViewController(vc, animated: true)

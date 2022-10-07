@@ -11,26 +11,26 @@ struct CityTrie {
     typealias Node = TrieNode<Character>
     
     public var count: Int {
-        return wordCount
+        return cityCount
     }
     
     public var isEmpty: Bool {
-        return wordCount == 0
+        return cityCount == 0
     }
     
     fileprivate let root: Node
-    fileprivate var wordCount: Int
-    var wordCitiesMap: [String: [CountryVO]] = [String: [CountryVO]]()
+    fileprivate var cityCount: Int
+    var cityList: [String: [CityVO]] = [String: [CityVO]]()
     
     public init() {
         root = Node()
-        wordCount = 0
+        cityCount = 0
     }
 }
 
 extension CityTrie {
-    mutating func add(_ city: CountryVO) {
-        guard !(city.name?.isEmpty ?? true) || !(city.country?.isEmpty ?? true) else { return }
+    mutating func add(_ city: CityVO) {
+        guard !(city.name?.isEmpty ?? true) else { return }
         var currentNode = root
         for character in (city.name ?? "").lowercased() {
             if let childNode = currentNode.children[character] {
@@ -42,19 +42,19 @@ extension CityTrie {
         guard !currentNode.isTerminating else {
             return
         }
-        if var exisitingCities = wordCitiesMap[(city.name ?? "").lowercased()] {
+        if var exisitingCities = cityList[(city.name ?? "").lowercased()] {
             exisitingCities.append(city)
-            wordCitiesMap[(city.name ?? "").lowercased()] = exisitingCities
+            cityList[(city.name ?? "").lowercased()] = exisitingCities
         } else {
-            wordCitiesMap[(city.name ?? "").lowercased()] = [city]
+            cityList[(city.name ?? "").lowercased()] = [city]
         }
-        wordCount += 1
+        cityCount += 1
         currentNode.isTerminating = true
     }
     
-    func findCitiesWithPrefix(prefix: String) -> [CountryVO] {
+    func findCitiesWithPrefix(prefix: String) -> [CityVO] {
         var words = [String]()
-        var cityList = [CountryVO]()
+        var cities = [CityVO]()
         let prefixLowerCased = prefix.lowercased()
         if let lastNode = findLastNodeOf(word: prefixLowerCased) {
             if lastNode.isTerminating {
@@ -66,10 +66,10 @@ extension CityTrie {
             }
         }
         words.forEach { word in
-            guard let data = wordCitiesMap[word.lowercased()]?[0] else {return}
-            cityList.append(data)
+            guard let data = cityList[word.lowercased()]?[0] else {return}
+            cities.append(data)
         }
-        return cityList
+        return cities
     }
 
     func findLastNodeOf(word: String) -> Node? {

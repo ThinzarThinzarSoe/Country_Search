@@ -13,7 +13,7 @@ class MapViewController : BaseViewController {
 
     @IBOutlet weak var mapView: MKMapView!
 
-    var countryData : CountryVO?
+    var countryData : CityVO?
     var annotation: MKPointAnnotation?
     
     override func viewDidLoad() {

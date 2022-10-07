@@ -15,7 +15,7 @@ class HomeViewModel : BaseViewModel {
     init(model: HomeModelProtocol = HomeModel()) {
         self.model = model
     }
-    let countryListBehaviorRelay = BehaviorRelay<[CountryVO]>(value: [])
+    let countryListBehaviorRelay = BehaviorRelay<[CityVO]>(value: [])
     let keywordDataBehaviorRelay = BehaviorRelay<String>(value: "")
 }
 
