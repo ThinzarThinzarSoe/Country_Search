@@ -50,6 +50,79 @@ Why I use RxSwift?
 
 Apple's iOS supports both synchronous and asynchronous tasks. In synchronous operations, tasks are performed one at a time. Therefore, other tasks must wait until the previous task is completed before continuing. Asynchronous tasks run simultaneously in the background. If background tasks are completed, we will be notified. Asynchronous programming allows our to process multiple requests at the same time, so we can accomplish more tasks in a shorter amount of time.Async work can be handled using third-party libraries. A few notable examples are Promises (PromiseKit), RxSwift, and ReactiveCocoa.
 
+## Search Methods
+
+In this project , I use presfix search tree (Trie Search Algorithm)
+
+I lerned from , https://www.raywenderlich.com/892-swift-algorithm-club-swift-trie-data-structure
+
+To add city name in node
+
+    mutating func add(_ city: CityVO) {
+        guard !(city.name?.isEmpty ?? true) else { return }
+        var currentNode = root
+        for character in (city.name ?? "").lowercased() {
+            if let childNode = currentNode.children[character] {
+                currentNode = childNode
+            } else {
+                currentNode = currentNode.add(child: character)
+            }
+        }
+        guard !currentNode.isTerminating else {
+            return
+        }
+        if var exisitingCities = cityList[(city.name ?? "").lowercased()] {
+            exisitingCities.append(city)
+            cityList[(city.name ?? "").lowercased()] = exisitingCities
+        } else {
+            cityList[(city.name ?? "").lowercased()] = [city]
+        }
+        cityCount += 1
+        currentNode.isTerminating = true
+    }
+    
+To search list of city by using search keywords
+
+    func findCitiesWithPrefix(prefix: String) -> [CityVO] {
+        var words = [String]()
+        var cities = [CityVO]()
+        let prefixLowerCased = prefix.lowercased()
+        if let lastNode = findLastNodeOf(word: prefixLowerCased) {
+            if lastNode.isTerminating {
+                words.append(prefixLowerCased)
+            }
+            for childNode in lastNode.children.values {
+                let childWords = wordsInSubtrie(rootNode: childNode, partialWord: prefixLowerCased)
+                words += childWords
+            }
+        }
+        words.forEach { word in
+            guard let data = cityList[word.lowercased()]?[0] else {return}
+            cities.append(data)
+        }
+        return cities
+    }
+    
+We should learned advantages and disadvantages of Trie.
+
+#### Advantages of Trie data structure:
+
+- Trie allows us to input and finds strings in O(l) time, where l is the length of a single word. It is faster as compared to both hash tables and binary search trees.
+
+- It provides alphabetical filtering of entries by the key of the node and hence makes it easier to print all words in alphabetical order.
+
+- Trie takes less space when compared to BST because the keys are not explicitly saved instead each key requires just an amortized fixed amount of space to be stored.
+
+- Prefix search/Longest prefix matching can be efficiently done with the help of trie data structure.
+
+- Since trie doesn’t need any hash function for its implementation so they are generally faster than hash tables for small keys like integers and pointers.
+
+- Tries support ordered iteration whereas iteration in a hash table will result in pseudorandom order given by the hash function which is usually more cumbersome
+
+#### Disadvantages of Trie data structure:
+
+- The main disadvantage of the trie is that it takes a lot of memory to store all the strings. For each node, we have too many node pointers which are equal to the no of characters in the worst case.
+
 ## Contributing
 
 - If you found a bug, open an issue.
