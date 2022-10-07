@@ -125,45 +125,28 @@ class HomeViewController : BaseViewController {
         }).disposed(by: disposableBag)
         
         viewModel.isNoDataPublishRealy.bind {
-            self.tblCountry.isHidden = $0
-            if $0 {
-                self.isShowNoDataAndInternet(isShow: true)
-                DispatchQueue.main.async {
-                    self.searchView.isHidden = false
-                    self.tblCountry.isHidden = false
-                    self.lblSearchResult.isHidden = false
-                    self.heightConstraintForSearchResultCount.constant = 0
-                }
-            }
+            self.showErrorView($0)
         }.disposed(by: disposableBag)
         
         viewModel.isSeverErrorPublishRelay.bind {
-            self.tblCountry.isHidden = $0
-            if $0 {
-                self.isShowNoDataAndInternet(isShow: $0 , isServerError: $0)
-                DispatchQueue.main.async {
-                    self.searchView.isHidden = false
-                    self.tblCountry.isHidden = false
-                    self.lblSearchResult.isHidden = false
-                    self.heightConstraintForSearchResultCount.constant = 0
-                }
-            }
+            self.showErrorView($0)
         }.disposed(by: disposableBag)
         
         viewModel.isNoInternetPublishRelay.bind {
-            self.tblCountry.isHidden = $0
-            if $0 {
-                self.isShowNoDataAndInternet(isShow: $0)
-                DispatchQueue.main.async {
-                    self.searchView.isHidden = false
-                    self.tblCountry.isHidden = false
-                    self.lblSearchResult.isHidden = false
-                    self.heightConstraintForSearchResultCount.constant = 0
-                }
-            }
+            self.showErrorView($0)
         }.disposed(by: disposableBag)
     }
     
+    func showErrorView(_ isShow : Bool) {
+        DispatchQueue.main.async {
+            self.tblCountry.isHidden = isShow
+            self.isShowNoDataAndInternet(isShow: isShow)
+            self.searchView.isHidden = isShow
+            self.tblCountry.isHidden = isShow
+            self.lblSearchResult.isHidden = isShow
+            self.heightConstraintForSearchResultCount.constant = 0
+        }
+    }
     override func reloadScreen() {
         super.reloadScreen()
         fetchData()

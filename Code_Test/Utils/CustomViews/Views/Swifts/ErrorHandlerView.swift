@@ -15,7 +15,6 @@ class ErrorHandlerView: BaseView {
     @IBOutlet weak var lblErrorTitle: UILabel!
     @IBOutlet weak var lblErrorDesc: UILabel!
     @IBOutlet weak var btnRetry: RoundedCornerUIButton!
-    @IBOutlet weak var widthConstraintForTryAgain: NSLayoutConstraint!
     
     weak var delegate : ErrorHandlerDelegate?
     
@@ -31,11 +30,9 @@ class ErrorHandlerView: BaseView {
 
     override func setupLanguage() {
         super.setupLanguage()
-        btnRetry.setTitle("Try Again", for: .normal)
     }
     
     func setupView(isShow : Bool , title : String , description : String , image : UIImage, isServerError : Bool = false) {
-        widthConstraintForTryAgain.constant = "Try Again".size(withAttributes: [.font: UIFont.Roboto.Bold.font(size: 16)]).width + 20
         var error_image : UIImage?
         var error_title : String?
         var error_desc : String?

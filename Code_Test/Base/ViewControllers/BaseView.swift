@@ -31,10 +31,13 @@ class BaseView : UIView {
     }
 
     func setupUI() {
-        view = loadViewFromNib()
-        view.frame = bounds
-        view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        addSubview(view)
+        self.view = self.loadViewFromNib()
+        self.view.frame = self.bounds
+        self.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        self.addSubview(self.view)
+//        DispatchQueue.main.async {
+//
+//        }
     }
     
     func loadViewFromNib() -> UIView! {
